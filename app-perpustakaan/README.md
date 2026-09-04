@@ -14,3 +14,10 @@ Aplikasi sistem informasi perpustakaan berbasis framework Laravel 12.
 - **Model:** Menangani struktur data dan query/interaksi ke basis data.
 - **View:** Mengelola tampilan UI untuk disajikan kepada pengguna.
 - **Controller:** Mengatur alur logika antara input pengguna, Model, dan View.
+
+
+
+Screenshot Pertemuan 2 
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
