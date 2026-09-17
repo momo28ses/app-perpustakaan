@@ -18,6 +18,13 @@ Aplikasi sistem informasi perpustakaan berbasis framework Laravel 12.
 
 
 Screenshot Pertemuan 2 
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
+### Screenshot Pertemuan 2
+
+#### 1. Output Terminal Route List
+![Output Terminal Route List](route-list.png)
+
+#### 2. Uji Coba Browser Halaman Books
+![Browser Books Index](browser-books.png)
+
+#### 3. Uji Coba Halaman Categories 405 Method Not Allowed
+![Browser Error 405](browser-405.png)
