@@ -1,60 +1,38 @@
-@extends('layouts.app')
+{{-- File: resources/views/categories/index.blade.php --}}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Kategori</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; max-width: 500px; }
+        label { display: block; margin-top: 12px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box; }
+        .error { color: #b91c1c; font-size: 14px; margin-top: 4px; }
+        .btn { margin-top: 20px; padding: 8px 16px; background: #2563eb; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Edit Kategori</h1>
+    <p><a href="{{ route('categories.index') }}">&larr; Kembali ke daftar kategori</a></p>
 
-@section('title', 'Daftar Anggota')
+    <form action="{{ route('categories.update', $category['id']) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-@section('content')
-    <h1>Daftar Anggota</h1>
+        <label for="nama_kategori">Nama Kategori</label>
+        <input type="text" name="nama_kategori" id="nama_kategori" value="{{ old('nama_kategori', $category['nama_kategori']) }}">
+        @error('nama_kategori')
+            <div class="error">{{ $message }}</div>
+        @enderror
 
-    @if (session('success'))
-        <div class="success">{{ session('success') }}</div>
-    @endif
+        <label for="deskripsi">Deskripsi (opsional)</label>
+        <textarea name="deskripsi" id="deskripsi" rows="4">{{ old('deskripsi', $category['deskripsi']) }}</textarea>
+        @error('deskripsi')
+            <div class="error">{{ $message }}</div>
+        @enderror
 
-    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-        <a href="{{ route('members.create') }}" class="btn">+ Tambah Anggota</a>
-
-        <form action="{{ route('members.index') }}" method="GET">
-            <input type="text" name="search" placeholder="Cari nama anggota..." value="{{ request('search') }}" style="padding: 6px; width: 200px;">
-            <button type="submit" class="btn">Cari</button>
-            @if(request('search'))
-                <a href="{{ route('members.index') }}">Reset</a>
-            @endif
-        </form>
-    </div>
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Telepon</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($members as $member)
-                <tr>
-                    <td>{{ $member['id'] }}</td>
-                    <td>{{ $member['nama'] }}</td>
-                    <td>{{ $member['email'] }}</td>
-                    <td>{{ $member['nomor_telepon'] }}</td>
-                    <td>{{ ucfirst($member['status']) }}</td>
-                    <td>
-                        <a href="{{ route('members.show', $member['id']) }}">Detail</a> |
-                        <a href="{{ route('members.edit', $member['id']) }}">Edit</a> |
-                        <form action="{{ route('members.destroy', $member['id']) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Yakin hapus anggota ini?')" style="background:none; border:none; color:red; cursor:pointer;">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr><td colspan="6">Belum ada data anggota.</td></tr>
-            @endforelse
-        </tbody>
-    </table>
-
-    {{ $members->appends(request()->query())->links() }}
-@endsection
+        <button type="submit" class="btn">Perbarui</button>
+    </form>
+</body>
+</html>
